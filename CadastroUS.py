@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from Banco import Banco
   
-class Application:
+class CadastroUS:
     def __init__(self, master=None):
         self.fonte = ("Verdana", "8")
         #-----------Buscar Usuário-----------
@@ -20,18 +20,6 @@ class Application:
         self.comb.pack()
         self.comb["value"] = self.combo_input()
         self.comb.bind("<<ComboboxSelected>>", self.buscarUsuario)
-
-##        self.lblIdUsuario = Label(self.cnt2, text="ID Usuário:", font=self.fonte, width=10)
-##        self.lblIdUsuario.pack(side=LEFT)
-##  
-##        self.txtIdUsuario = Entry(self.cnt2)
-##        self.txtIdUsuario["width"] = 10
-##        self.txtIdUsuario["font"] = self.fonte
-##        self.txtIdUsuario.pack(side=LEFT)
-##  
-##        self.btnBuscar = Button(self.cnt2, text="Buscar", font=self.fonte, width=10)
-##        self.btnBuscar["command"] = self.buscarUsuario
-##        self.btnBuscar.pack(side=RIGHT)
         #-----------Titulo-----------
         self.cnt1 = Frame(master)
         self.cnt1["pady"] = 10
@@ -145,14 +133,8 @@ class Application:
         for row in c.fetchall():
             result.append(row[0])
         return result
-    
-    def preencherUsuario(self):
-        user = Usuarios()
-  
-        
 
     def limparUsuario(self):
-##        self.txtIdUsuario.delete(0, END)
         self.comb.set('')
         self.txtNome.delete(0, END)
         self.txtTelefone.delete(0, END)
@@ -182,22 +164,16 @@ class Application:
   
     def excluirUsuario(self):
         user = Usuarios()
-        user.idusuario = self.txtIdUsuario.get()
+        # user.idusuario = self.txtIdUsuario.get()
         self.lblMsg["text"] = user.deleteUser()
         self.limparUsuario()
   
-  
     def buscarUsuario(self, event):
         user = Usuarios()
-  
-##        idUsuario = self.txtIdUsuario.get()
         nome = self.comb.get()
         if nome:
             self.lblMsg["text"] = user.selectUser(nome)
-      
-    ##        self.txtIdUsuario.delete(0, END)
-    ##        self.txtIdUsuario.insert(INSERT, user.idusuario)
-      
+
             self.txtNome.delete(0, END)
             self.txtNome.insert(INSERT, user.nome)
       
@@ -212,10 +188,21 @@ class Application:
       
             self.txtSenha.delete(0, END)
             self.txtSenha.insert(INSERT,user.senha)
+
+    def show(self):
+        root = Tk()
+        root.title("Cadastro de usuário")
+        width = 400
+        height = 300
+        screen_width = root.winfo_screenwidth()
+        screen_height = root.winfo_screenheight()
+        x = (screen_width/2) - (width/2)
+        y = (screen_height/2) - (height/2)
+        root.geometry("%dx%d+%d+%d" % (width, height, x, y))
+        root.resizable(0, 0)
+        CadastroUS(root)
+        root.mainloop()
   
   
   
-##root = Tk()
-##root.title("Cadastro de usuário")
-##Application(root)
-##root.mainloop()
+

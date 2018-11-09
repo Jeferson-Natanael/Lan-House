@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from Banco import Banco
   
-class Application:
+class CadastroPC:
     def __init__(self, master=None):
         self.fonte = ("Verdana", "8")
         #-----------Buscar PC's-----------
@@ -119,8 +119,8 @@ class Application:
         pc.nome = nome
         self.lblMsg["text"] = pc.deletePC()
         self.limparComputador()
-  
-  
+
+
     def buscarComputador(self, event):
         pc = Computadores()
         nome = self.comb.get()
@@ -133,9 +133,16 @@ class Application:
             self.txtIP.delete(0, END)
             self.txtIP.insert(INSERT, pc.ip)
   
-  
-  
-root = Tk()
-root.title("Cadastro de computador")
-Application(root)
-root.mainloop()
+    def show(self):
+        root = Tk()
+        root.title("Cadastro de computador")
+        width = 400
+        height = 300
+        screen_width = root.winfo_screenwidth()
+        screen_height = root.winfo_screenheight()
+        x = (screen_width/2) - (width/2)
+        y = (screen_height/2) - (height/2)
+        root.geometry("%dx%d+%d+%d" % (width, height, x, y))
+        root.resizable(0, 0)
+        CadastroPC(root)
+        root.mainloop()
