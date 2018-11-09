@@ -4,6 +4,7 @@ from CadastroUS import CadastroUS
 from CadastroPC import CadastroPC
 class Application:
     def __init__(self, master=None):
+        self.fontePadrao = ('arial', 10)
         self.LOGIN = StringVar()
         self.SENHA = StringVar()
 
@@ -14,16 +15,16 @@ class Application:
 
         self.lblTitle = Label(self.Top, text = "Autenticação para o sistema", font=('arial', 15))
         self.lblTitle.pack(fill=X)
-        self.lblLOGIN = Label(self.Form, text = "LOGIN:", font=('arial', 14), bd=15)
+        self.lblLOGIN = Label(self.Form, text = "LOGIN:", font=self.fontePadrao, bd=15)
         self.lblLOGIN.grid(row=0, sticky="e")
-        self.lblSENHA = Label(self.Form, text = "SENHA:", font=('arial', 14), bd=15)
+        self.lblSENHA = Label(self.Form, text = "SENHA:", font=self.fontePadrao, bd=15)
         self.lblSENHA.grid(row=1, sticky="e")
         self.lblText = Label(self.Form)
         self.lblText.grid(row=2, columnspan=2)
 
-        self.LOGIN = Entry(self.Form, textvariable=self.LOGIN, font=(14))
+        self.LOGIN = Entry(self.Form, textvariable=self.LOGIN, font=(12))
         self.LOGIN.grid(row=0, column=1)
-        self.SENHA = Entry(self.Form, textvariable=self.SENHA, show="*", font=(14))
+        self.SENHA = Entry(self.Form, textvariable=self.SENHA, show="*", font=(12))
         self.SENHA.grid(row=1, column=1)
 
         self.btnLogin = Button(self.Form, text="Login", width=45, command= self.Login)
@@ -52,7 +53,7 @@ class Application:
                 self.SENHA.delete(0, END)
                 self.lblText.config(text="")
             else:
-                self.lblText.config(text="Login ou senha invalido!", fg="red")
+                self.lblText.config(text="Login ou senha invalido!", fg="red", font=self.fontePadrao)
                 self.LOGIN.delete(0, END)
                 self.SENHA.delete(0, END)  
         cursor.close()
@@ -80,8 +81,30 @@ class Application:
         y = (screen_height/2) - (height/2)
         root.resizable(0, 0)
         Home.geometry("%dx%d+%d+%d" % (width, height, x, y))
-        lblHome = Label(Home, text="Logado com sucesso!", font=('times new roman', 20))
-        lblHome.pack()
+        lblHome = Label(Home, text="Sistema Skillsoft", font=('times new roman', 20))
+        lblHome.grid(row=0, column=0)
+        lblHome.pack(fill=X)
+
+        btnNovaSessao = Button(Home, text="Abrir nova Sessão", font=self.fontePadrao)
+        # btnNovaSessao.grid(row=1,column=0)
+        btnNovaSessao.pack(side=TOP)
+
+        btnSesAtiva = Button(Home, text="Sessões Ativas", font=self.fontePadrao)
+        # btnSesAtiva.grid(row=1,column=1)
+        btnSesAtiva.pack(side=TOP)
+
+        btnDeslPC = Button(Home, text="Desligar PC da Rede", font=self.fontePadrao)
+        # btnDeslPC.grid(row=1,column=2)
+        btnDeslPC.pack(side=TOP)
+
+        btnBlocPC = Button(Home, text="Bloquear Computador", font=self.fontePadrao)
+        # btnBlocPC.grid(row=2,column=0)
+        btnBlocPC.pack(side=TOP)
+        
+        btnAllClientes = Button(Home, text="Todos os Clientes", font=self.fontePadrao)
+        # btnAllClientes.grid(row=2,column=1)
+        btnAllClientes.pack(side=TOP)
+
 
     def Back(self):
         global root
