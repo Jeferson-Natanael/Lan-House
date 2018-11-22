@@ -1,6 +1,7 @@
 from tkinter import*
 class Login:
     def __init__(self, master=None):
+        Frame.__init__(self, master)
 ##------------------- Teste manipulando click -------------------
 ##        self.widget1 = Frame(master)
 ##        self.widget1.pack()
